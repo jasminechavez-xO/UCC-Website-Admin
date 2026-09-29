@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+  <title>
+   UCC Admin | Academics
+  </title>
+  <link href="images/ucc-LOGO.png" rel="icon" type="image/png"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Libre+Baskerville:wght@700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://unpkg.com/lucide@latest">
+  </script>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="dashboard-layout">
+   <aside class="sidebar">
+    <div class="sidebar-top">
+     <div class="logo-wrap">
+      <img alt="UCC Logo" src="images/ucc-LOGO.png"/>
+      <div>
+       <h2>
+        UCC Admin
+       </h2>
+       <p>
+        University of Caloocan City
+       </p>
+      </div>
+     </div>
+    </div>
+    <div class="gold-line">
+    </div>
+    <nav class="sidebar-nav">
+     <a href="Dashboard.html">
+      <i data-lucide="house">
+      </i>
+      <span>
+       Dashboard
+      </span>
+     </a>
+     <a href="Posts.html">
+      <i data-lucide="newspaper">
+      </i>
+      <span>
+       Posts
+      </span>
+     </a>
+     <div class="menu-group open">
+      <button class="menu-title active" type="button">
+       <div>
+        <i data-lucide="graduation-cap">
+        </i>
+        <span>
+         Academics
+        </span>
+       </div>
+       <i class="arrow" data-lucide="chevron-down">
+       </i>
+      </button>
+      <div class="submenu">
+       <a class="active" href="Academics.html">
+        Colleges
+       </a>
+      </div>
+     </div>
+     <div class="menu-group">
+      <button class="menu-title" type="button">
+       <div>
+        <i data-lucide="users">
+        </i>
+        <span>
+         Officials
+        </span>
+       </div>
+       <i class="arrow" data-lucide="chevron-down">
+       </i>
+      </button>
+      <div class="submenu">
+       <a href="Executive-Officials.html">
+        Executive Officials
+       </a>
+       <a href="Board-of-Regents.html">
+        Board of Regents
+       </a>
+      </div>
+     </div>
+     <div class="menu-group">
+      <button class="menu-title" type="button">
+       <div>
+        <i data-lucide="building-2">
+        </i>
+        <span>
+         Components
+        </span>
+       </div>
+       <i class="arrow" data-lucide="chevron-down">
+       </i>
+      </button>
+      <div class="submenu">
+       <a href="Campuses.html">
+        Campuses
+       </a>
+       <a href="Contact-Information.html">
+        Contact Information
+       </a>
+       <a href="Quick-Links.html">
+        Quick Links
+       </a>
+      </div>
+     </div>
+    </nav>
+    <div class="sidebar-bottom">
+     <a href="Password.html">
+      <i data-lucide="lock">
+      </i>
+      <span>
+       Password
+      </span>
+     </a>
+     <a href="Logout.html">
+      <i data-lucide="log-out">
+      </i>
+      <span>
+       Logout
+      </span>
+     </a>
+    </div>
+    <div class="sidebar-art">
+    </div>
+   </aside>
+   <main class="main-content">
+    <header class="top-header">
+     <div class="header-left">
+      <h1>
+       Colleges
+      </h1>
+     </div>
+     <div class="header-right">
+      <div class="admin-profile">
+       <div class="admin-text">
+        <small>
+         Administrator
+        </small>
+        <span>
+         Welcome, Admin!
+        </span>
+       </div>
+       <div class="avatar">
+        <i data-lucide="circle-user-round">
+        </i>
+       </div>
+      </div>
+     </div>
+     <div class="header-art">
+     </div>
+     <div class="gold-divider">
+      <span>
+      </span>
+     </div>
+    </header>
+    <style>
+
+     .academics-actions{display:flex;align-items:center;gap:12px}
+     .primary-btn,.secondary-btn,.secondary-outline-btn{height:44px;border:0;border-radius:12px;padding:0 17px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 13px "DM Sans";cursor:pointer;transition:.2s}
+     .primary-btn{background:#005F3C;color:#fff;box-shadow:0 7px 18px rgba(0,95,60,.16)}
+     .primary-btn:hover{background:#00422B;transform:translateY(-1px)}
+     .secondary-btn{background:#C89A0B;color:#fff}
+     .secondary-outline-btn{background:#fff;color:#005F3C;border:1px solid #D8B056}
+     .college-head-actions{display:flex;align-items:center;gap:7px}
+     .icon-btn{width:36px;height:36px;border:1px solid #E8E3D8;border-radius:10px;background:#fff;color:#005F3C;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+     .icon-btn:hover{background:#F8F4EA;border-color:#D8B056}
+     .icon-btn.danger{color:#b23a2f}
+     .program-main{min-width:0;flex:1}
+     .program-actions{display:flex;align-items:center;gap:5px;margin-left:auto;opacity:0}
+     .program-item:hover .program-actions{opacity:1}
+     .add-program-btn{width:100%;margin-top:8px;padding:11px;border:1px dashed #D8B056;border-radius:11px;background:#fffaf0;color:#005F3C;font:600 12px "DM Sans";cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+     .modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(13,42,33,.38);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:.2s}
+     .modal-overlay.open{opacity:1;visibility:visible}
+     .manage-modal{width:min(760px,100%);max-height:90vh;overflow:auto;background:#FDFBF5;border:1px solid #E8E3D8;border-radius:24px;box-shadow:0 24px 70px rgba(13,42,33,.22)}
+     .small-modal{width:min(560px,100%)}
+     .modal-header{display:flex;justify-content:space-between;gap:20px;padding:25px 27px 19px;border-bottom:1px solid #E8E3D8;background:linear-gradient(135deg,#fff,#F8F4EA)}
+     .modal-kicker{color:#C89A0B;font:700 10px "DM Sans";letter-spacing:.12em}
+     .modal-header h2{margin:5px 0 4px;color:#0D2A21;font:700 23px "Segoe UI"}
+     .modal-header p{margin:0;color:#777;font-size:13px}
+     .modal-close{width:38px;height:38px;border:1px solid #E8E3D8;border-radius:11px;background:#fff;color:#005F3C;cursor:pointer}
+     .modal-form{padding:24px 27px}
+     .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+     .form-field{display:flex;flex-direction:column;gap:7px}
+     .form-field.full{grid-column:1/-1}
+     .form-field>span{font:600 12px "DM Sans";color:#0D2A21}
+     .form-field input,.form-field textarea,.form-field select{width:100%;box-sizing:border-box;border:1px solid #E8E3D8;border-radius:11px;background:#fff;padding:11px 13px;font:14px "DM Sans";color:#0D2A21;outline:none}
+     .form-field input,.form-field select{height:44px}
+     .form-field textarea{resize:vertical}
+     .modal-section{margin-top:24px;padding-top:20px;border-top:1px solid #E8E3D8}
+     .section-heading-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:13px}
+     .section-heading-row h3{margin:0;color:#0D2A21;font:700 16px "Segoe UI"}
+     .section-heading-row p{margin:4px 0 0;color:#888;font-size:12px}
+     .modal-program-list{display:flex;flex-direction:column;gap:8px}
+     .modal-program-row{display:flex;align-items:center;gap:11px;padding:11px 12px;background:#fff;border:1px solid #E8E3D8;border-radius:12px}
+     .modal-program-number{width:28px;height:28px;border-radius:8px;background:rgba(0,95,60,.08);display:flex;align-items:center;justify-content:center;color:#005F3C;font:700 11px "DM Sans";flex:0 0 28px}
+     .modal-program-info{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+     .modal-program-info strong{font:600 13px "DM Sans";color:#0D2A21}
+     .modal-program-info span{font-size:11px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+     .modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid #E8E3D8}
+     @media(max-width:760px){.academics-actions{width:100%;flex-direction:column;align-items:stretch}.form-grid{grid-template-columns:1fr}.form-field.full{grid-column:auto}.modal-header,.modal-form{padding-left:20px;padding-right:20px}.section-heading-row{align-items:flex-start;flex-direction:column}.program-actions{opacity:1}}
+     .academics-page{padding:30px 36px 50px}.academics-tools{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:24px}.academics-tools p{margin:6px 0 0;color:#777;font-size:14px}.academics-search{position:relative;width:330px}.academics-search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;color:#777}.academics-search input{width:100%;height:46px;padding:0 16px 0 46px;border:1px solid #ddd;border-radius:13px;background:#fff;font:14px "DM Sans";outline:0}.college-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.college-card{overflow:hidden;border:1px solid rgba(22,71,52,.1);border-radius:22px;background:rgba(255,255,255,.85);box-shadow:0 10px 28px rgba(0,0,0,.06)}.college-head{display:flex;align-items:center;gap:14px;padding:19px;background:linear-gradient(135deg,rgba(22,71,52,.055),rgba(194,154,61,.055));border-bottom:1px solid rgba(22,71,52,.08)}.college-logo{width:56px;height:56px;flex:0 0 56px;border:1px solid #eee;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#164734}.college-logo img{width:100%;height:100%;object-fit:contain;padding:5px}.college-heading{min-width:0;flex:1}.college-head small{color:#b08a36;font-size:10px;font-weight:700;letter-spacing:.08em}.college-head h2{margin:3px 0;color:#164734;font:700 17px/1.3 "Segoe UI"}.college-head span{font-size:12px;color:#777}.toggle{width:36px;height:36px;border:1px solid #ddd;border-radius:10px;background:#fff;color:#164734;cursor:pointer}.program-list{padding:5px 20px 12px}.program-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #eee}.program-item:last-child{border-bottom:0}.program-number{width:27px;height:27px;flex:0 0 27px;border-radius:9px;background:rgba(22,71,52,.08);display:flex;align-items:center;justify-content:center;color:#164734;font-size:11px;font-weight:700}.program-item h3{margin:0;color:#333;font:600 14px/1.45 "Segoe UI"}.program-item p{margin:5px 0 0;color:#777;font-size:12px;line-height:1.55}.academics-empty{display:none;grid-column:1/-1;text-align:center;padding:40px;color:#777}@media(max-width:1050px){.college-grid{grid-template-columns:1fr}}@media(max-width:760px){.academics-page{padding:24px 20px}.academics-tools{flex-direction:column;align-items:stretch}.academics-search{width:100%}}
+    </style>
+    <div class="academics-page">
+     <div class="academics-tools">
+      <div>
+       <p>Manage the colleges and academic programs of the University of Caloocan City.</p>
+      </div>
+      <div class="academics-actions">
+       <div class="academics-search">
+        <i data-lucide="search"></i>
+        <input autocomplete="off" id="academicSearch" placeholder="Search colleges or programs..."/>
+       </div>
+       <button class="primary-btn" id="addCollegeBtn" type="button">
+        <i data-lucide="plus"></i>
+        <span>Add College</span>
+       </button>
+      </div>
+     </div>
+     <div class="college-grid" id="collegeGrid">
+      <section class="college-card">
+       <div class="college-head">
+        <div class="college-logo">
+         <img alt="COLLEGE OF BUSINESS AND ACCOUNTANCY logo" src="images/CBA-LOGO.png"/>
+        </div>
+        <div class="college-heading">
+         <small>
+          ACADEMIC UNIT
+         </small>
+         <h2>
+          COLLEGE OF BUSINESS AND ACCOUNTANCY
+         </h2>
+         <span>
+          9 programs
+         </span>
+        </div>
+        <button class="toggle" type="button">
+         <i data-lucide="chevron-up">
+         </i>
+        </button>
+       </div>
+       <div class="program-list">
+        <div class="program-item">
+         <span class="program-number">
+          1
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Accountancy
+          </h3>
+          <p>
+           Our vision is to emerge as a leading national and international educational hub for accountancy, renowned for our unwavering dedication to cultivating exceptionally skilled and ethical professionals. We aspire to pioneer innovative advancements in curriculum and teaching methodologies, ensuring our graduates excel as financial stewards, driving economic prosperity, and demonstrating exemplary leadership with integrity in the ever-evolving global arena.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          2
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Accounting Information System
+          </h3>
+          <p>
+           Our vision is to emerge as a leading national and international educational hub for accountancy, renowned for our unwavering dedication to cultivating exceptionally skilled and ethical professionals. We aspire to pioneer innovative advancements in curriculum and teaching methodologies, ensuring our graduates excel as financial stewards, driving economic prosperity, and demonstrating exemplary leadership with integrity in the ever-evolving global arena.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          3
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Business Administration, Major in Financial Management
+          </h3>
+          <p>
+           The Financial Management program prepares the graduates for careers in diverse areas such as corporate finance, investment management, banking, credit, trust operations, insurance, and various financial markets. The curriculum covers financial institutions and technical skills rooted in established theories, methodologies, and analytical tools. It emphasizes ethics, market integrity, regulations, good governance, and a global perspective...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          4
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Business Administration, Major in Human Resource Management
+          </h3>
+          <p>
+           The Human Resource Management Program prepares graduates for a career in the Human Resource Department of any organization, handling the many diverse human capital requirements of the organization including recruitment, staffing, training and career development. MISSION...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          5
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Business Administration, Major in Marketing Management
+          </h3>
+          <p>
+           The Marketing Management program prepares graduates for careers in marketing, market research, advertising, and public relations. The curriculum offers technical skills and competencies essential for the field, while also fostering a flexible mindset needed to remain competitive in a dynamic business landscape. MISSION...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          6
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Entrepreneurship
+          </h3>
+          <p>
+           The Bachelor of Science in Entrepreneurship is a four-year program dedicated to producing dynamic, innovative, and passion-driven young entrepreneurs. The program focuses on developing excellent opportunity seekers, risk takers, and career movers. Through a combination of classroom training and experiential learning, aspiring entrepreneurs acquire the skills, values, and attitudes necessary for success. In the program's capstone project, students are required to create and implement a year-lo...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          7
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Hospitality Management
+          </h3>
+          <p>
+           This program prepares students for becoming leaders in the dynamic hospitality industry.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          8
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Office Administration
+          </h3>
+          <p>
+           The Bachelor of Science in Office Administration is a four-year program in which students would be prepared for a career in an outcome-focused, technology rich, professional environment. Courses in the curriculum are those that will thoroughly familiarize the students with current techniques in office practice and procedures, developments in office systems and technology, good team-working and management skills, and application of the...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          9
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Tourism Management
+          </h3>
+          <p>
+           This program prepares students for becoming professionals in the tourism industry.
+          </p>
+         </div>
+        </div>
+       </div>
+      </section>
+      <section class="college-card">
+       <div class="college-head">
+        <div class="college-logo">
+         <img alt="COLLEGE OF CRIMINAL JUSTICE EDUCATION logo" src="images/CCJE-LOGO.png"/>
+        </div>
+        <div class="college-heading">
+         <small>
+          ACADEMIC UNIT
+         </small>
+         <h2>
+          COLLEGE OF CRIMINAL JUSTICE EDUCATION
+         </h2>
+         <span>
+          2 programs
+         </span>
+        </div>
+        <button class="toggle" type="button">
+         <i data-lucide="chevron-up">
+         </i>
+        </button>
+       </div>
+       <div class="program-list">
+        <div class="program-item">
+         <span class="program-number">
+          1
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Criminology
+          </h3>
+          <p>
+           The Bachelor of Science in Criminology (BS Crim) program is designed to produce knowledgeable, skilled, and ethical professionals in the criminal justice system. It equips students with a solid foundation in law enforcement, criminology, corrections, forensic science, criminal law, and the judicial process, integrating theory with practical training. The program emphasizes critical thinking, research, and community engagement, with a required practicum or field immersion to provide hands-on experience.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          2
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Industrial Security Management
+          </h3>
+          <p>
+           The Bachelor of Science in Industrial Security Management (BSISM) program trains students in security principles, risk management, and protective services for industrial, corporate, and institutional settings. It equips graduates with skills in security administration, investigations, emergency preparedness, and asset protection through both theoretical and practical training. Graduates are prepared for careers as security managers, corporate security officers, and related professionals.
+          </p>
+         </div>
+        </div>
+       </div>
+      </section>
+      <section class="college-card">
+       <div class="college-head">
+        <div class="college-logo">
+         <img alt="COLLEGE OF EDUCATION logo" src="images/COEd-LOGO.png"/>
+        </div>
+        <div class="college-heading">
+         <small>
+          ACADEMIC UNIT
+         </small>
+         <h2>
+          COLLEGE OF EDUCATION
+         </h2>
+         <span>
+          7 programs
+         </span>
+        </div>
+        <button class="toggle" type="button">
+         <i data-lucide="chevron-up">
+         </i>
+        </button>
+       </div>
+       <div class="program-list">
+        <div class="program-item">
+         <span class="program-number">
+          1
+         </span>
+         <div>
+          <h3>
+           Bachelor in Secondary Education Major in English
+          </h3>
+          <p>
+           The BSE-English department embraces its mission to prepare learners to become competent English educators and committed professionals equipped with the necessary knowledge, skills, and values to be productive and responsible citizens of the global community.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          2
+         </span>
+         <div>
+          <h3>
+           Bachelor in Secondary Education Major in English - Chinese
+          </h3>
+          <p>
+           The BSE-English department embraces its mission to prepare learners to become competent English educators and committed professionals equipped with the necessary knowledge, skills, and values to be productive and responsible citizens of the glocal community.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          3
+         </span>
+         <div>
+          <h3>
+           Bachelor in Secondary Education Major in Science
+          </h3>
+          <p>
+           To provide high-quality scientific instruction with focus on hands-on learning and problem solving, serve the communities of our country, locality, and university, and advance knowledge of how living organisms interact with the environment through research. Additionally, to promote understanding of the physical world through educational outreach activities for students of all ages.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          4
+         </span>
+         <div>
+          <h3>
+           Bachelor in Secondary Education Major in Technology and Livelihood Education
+          </h3>
+          <p>
+           The Bachelor of Technology and Livelihood Education envisions itself becoming producers of well-equipped, internationally competitive, and dynamic educators and educational leaders, permeated with 21st century knowledge and skills driven by a deep sense of character, nationalism, uprightness, and environmental consciousness.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          5
+         </span>
+         <div>
+          <h3>
+           Bachelor of Early Childhood Education
+          </h3>
+          <p>
+           The Bachelor of Early Childhood Education Course provides quality higher education to pre-service teachers through proper training, output-oriented tasks, and competent faculty and administrative workforces dedicated to producing globally competitive professionals with a sense of national responsibility.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          6
+         </span>
+         <div>
+          <h3>
+           Certificate in Professional Education
+          </h3>
+          <p>
+           A professional education program designed to provide learners with the necessary foundations and preparation for the teaching profession.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          7
+         </span>
+         <div>
+          <h3>
+           Elementary | Secondary | P.E.
+          </h3>
+          <p>
+           Teacher education offerings supporting preparation for elementary, secondary, and physical education teaching fields.
+          </p>
+         </div>
+        </div>
+       </div>
+      </section>
+      <section class="college-card">
+       <div class="college-head">
+        <div class="college-logo">
+         <img alt="COLLEGE OF ENGINEERING logo" src="images/COEng-LOGO.png"/>
+        </div>
+        <div class="college-heading">
+         <small>
+          ACADEMIC UNIT
+         </small>
+         <h2>
+          COLLEGE OF ENGINEERING
+         </h2>
+         <span>
+          4 programs
+         </span>
+        </div>
+        <button class="toggle" type="button">
+         <i data-lucide="chevron-up">
+         </i>
+        </button>
+       </div>
+       <div class="program-list">
+        <div class="program-item">
+         <span class="program-number">
+          1
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Computer Engineering
+          </h3>
+          <p>
+           The Bachelor of Science in Computer Engineering (BSCpE) is a program that embodies the science and technology of design, development, implementation, maintenance, and integration of software and hardware components in modern computing systems and computer-controlled equipment.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          2
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Electrical Engineering
+          </h3>
+          <p>
+           Electrical Engineering is a profession that involves the conceptualization, development, design, improvement, and application of safe, healthy, ethical, and economical ways of utilizing materials and energy in unit processes and operations for the benefit of society and the environment.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          3
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Electronics Engineering
+          </h3>
+          <p>
+           Electronics Engineering integrates available and emerging technologies with knowledge of mathematics, natural, social, and applied sciences to conceptualize, design, and implement new, improved, or innovative electronic, computer, and communication systems, devices, goods, services, and processes.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          4
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Industrial Engineering
+          </h3>
+          <p>
+           Industrial Engineering deals with the design, improvement, and installation of integrated systems of people, materials, information, equipment, monetary and energy resources to produce quality and cost-effective goods and services in a healthy and efficient work environment.
+          </p>
+         </div>
+        </div>
+       </div>
+      </section>
+      <section class="college-card">
+       <div class="college-head">
+        <div class="college-logo">
+         <img alt="COLLEGE OF LAW logo" src="images/COL-LOGO.png"/>
+        </div>
+        <div class="college-heading">
+         <small>
+          ACADEMIC UNIT
+         </small>
+         <h2>
+          COLLEGE OF LAW
+         </h2>
+         <span>
+          1 programs
+         </span>
+        </div>
+        <button class="toggle" type="button">
+         <i data-lucide="chevron-up">
+         </i>
+        </button>
+       </div>
+       <div class="program-list">
+        <div class="program-item">
+         <span class="program-number">
+          1
+         </span>
+         <div>
+          <h3>
+           Law
+          </h3>
+          <p>
+           The UCC College of Law provides legal education focused on developing future legal professionals who excel academically and ethically, while becoming driven, socially sensitive, and community-aware members of the legal profession.
+          </p>
+         </div>
+        </div>
+       </div>
+      </section>
+      <section class="college-card">
+       <div class="college-head">
+        <div class="college-logo">
+         <img alt="COLLEGE OF LIBERAL ARTS AND SCIENCES logo" src="images/CLAS-LOGO.png"/>
+        </div>
+        <div class="college-heading">
+         <small>
+          ACADEMIC UNIT
+         </small>
+         <h2>
+          COLLEGE OF LIBERAL ARTS AND SCIENCES
+         </h2>
+         <span>
+          10 programs
+         </span>
+        </div>
+        <button class="toggle" type="button">
+         <i data-lucide="chevron-up">
+         </i>
+        </button>
+       </div>
+       <div class="program-list">
+        <div class="program-item">
+         <span class="program-number">
+          1
+         </span>
+         <div>
+          <h3>
+           AB Political Science
+          </h3>
+          <p>
+           The department of Political Science was established 1997, was a center of learning, with the principles of democracy, excellence towards progressive, responsible, state of the art, leadership in Caloocan City and the nation. The role of the department to develop students&rsquo; experts in politics and governance. Indicating the philosophy of responsible citizenship, in order to achieve progress and development with social justice and public service for all, through Academics excellence, scientifi ...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          2
+         </span>
+         <div>
+          <h3>
+           BA Communication
+          </h3>
+          <p>
+           A four-year degree program that prepares and hones students&rsquo; competence to pursue career in the media industry particularly in advertising and public relations to meet the world&rsquo;s changing needs. Students are being proficient in the skills necessary as a communication practitioner in various fields like broadcasting, print, theatre arts, cinema, and advertising. The program also tailors basic knowledge in the Business Process Outsourcing Industry (BPO) which includes integrated courses fr ...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          3
+         </span>
+         <div>
+          <h3>
+           Bachelor of Public Administration
+          </h3>
+          <p>
+           This is a degree course requiring graduates to pass the Civil Service Examination to qualify for employment in government offices. The course is designated to prepare graduates to become effective and efficient public servants to man government offices all over the country. Only passers of the University Entrance Examination with an average of 83% better can quality to enroll. A grade retention of 2.25 is imposed to ensure quality graduates. Review lessons a ...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          4
+         </span>
+         <div>
+          <h3>
+           Bachelor of Public Administration (Special Program)
+          </h3>
+          <p>
+           This is a degree course requiring graduates to pass the Civil Service Examination to qualify for employment in government offices. The course is designated to prepare graduates to become effective and efficient public servants to man government offices all over the country. Only passers of the University Entrance Examination with an average of 83% better can quality to enroll. A grade retention of 2.25 is imposed to ensure quality graduates.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          5
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Computer Science
+          </h3>
+          <p>
+           The Bachelor of Science in Computer Science combines a core of Computer Science subjects with substantial depth in other required minor subjects. This will ensures that students have the required tools to remain updated as technologies and trends change. The program is design mainly to maintaining the technical knowledge of the students starting from first year up to the last semester of the year of their stay. The curriculum is packed with all the basic and advanced programming skills and neces ...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          6
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Entertainment and Multimedia Computing
+          </h3>
+          <p>
+           The field of Entertainment and Multimedia Computing is the study and use of concepts, principles, and techniques of computing in the design and development of multimedia products and solutions. It includes various applications such as science, entertainment, education, simulations, and advertising. The program enables the students to be knowledgeable of the whole pipeline of Game Development and Digital Animation projects. The students will acquire the independence and creative competen ...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          7
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Information System
+          </h3>
+          <p>
+           This 4-year program is a hybrid course combining the fundamentals of Computing Science with the basics of business courses like management, accounting, finance and other office management essentials. Students are being honed to designing, developing systems and managing information system setups like transaction processing system, automation system, and other enterprise-based systems.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          8
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Information Technology
+          </h3>
+          <p>
+           This 4-year program is a hybrid course combining the fundamentals of Computing Science with the basics of business courses like management, accounting, finance and other office management essentials. Students are being honed to designing, developing systems and managing information system setups like transaction processing system, automation system, and other enterprise-based systems.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          9
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Mathematics
+          </h3>
+          <p>
+           The undergraduate mathematics program of the University of Caloocan City comprised of general education courses and substantial mathematics courses applicable in Business, Engineering, Statistics and Technology. To comply with CHED CMO No. 19, s. 2007, the aforesaid program attempted for a change in nomenclature to BACHELOR OF SCIENCE IN MATHEMATICS for its freshmen before the Technical Assessment of the Commission on Higher Education last September 28, 2012. However, because of the K-12 effe ...
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          10
+         </span>
+         <div>
+          <h3>
+           Bachelor of Science in Psychology
+          </h3>
+          <p>
+           The Bachelor of Science in Psychology is a 4-year degree program that aims to equip the future psychologist with skills and knowledge demanded in the third millennium which embodies the total Academics and practical development of the individual to do their task after graduation fully well.
+          </p>
+         </div>
+        </div>
+       </div>
+      </section>
+      <section class="college-card">
+       <div class="college-head">
+        <div class="college-logo">
+         <img alt="GRADUATE SCHOOL logo" src="images/GS-LOGO.png"/>
+        </div>
+        <div class="college-heading">
+         <small>
+          ACADEMIC UNIT
+         </small>
+         <h2>
+          GRADUATE SCHOOL
+         </h2>
+         <span>
+          7 programs
+         </span>
+        </div>
+        <button class="toggle" type="button">
+         <i data-lucide="chevron-up">
+         </i>
+        </button>
+       </div>
+       <div class="program-list">
+        <div class="program-item">
+         <span class="program-number">
+          1
+         </span>
+         <div>
+          <h3>
+           Doctor of Philosophy, Major in Educational Management
+          </h3>
+          <p>
+           The program aims to produce graduates who are competent and intellectually, socially, spiritually, and morally prepared to meet the educational and information needs of a multicultural community. It also develops moral character, personal integrity, family solidarity, citizenship, unity, and peace.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          2
+         </span>
+         <div>
+          <h3>
+           Master in Public Administration
+          </h3>
+          <p>
+           The University of Caloocan City Master in Public Administration Program is an extensive course designed to provide students with high-quality education in preparation for careers or career advancement in government and the public sector, with emphasis on professionalism, good governance, research, knowledge, ability, and skills.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          3
+         </span>
+         <div>
+          <h3>
+           Master of Arts in Education, Major in Educational Management
+          </h3>
+          <p>
+           The program aims to update and enrich teachers content knowledge, enhance and expand theoretical and technical knowledge for teaching, and develop teachers&rsquo; research capabilities for reviewing, verifying, validating, contextualizing, and applying theoretical and practical knowledge.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          4
+         </span>
+         <div>
+          <h3>
+           Master of Arts in Education, Major in Teaching in the Early Grades
+          </h3>
+          <p>
+           The program aims to update and enrich teachers content knowledge, enhance and expand their theoretical and technical knowledge for teaching, and develop their research capabilities for reviewing, verifying, validating, contextualizing, and applying theoretical and practical knowledge.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          5
+         </span>
+         <div>
+          <h3>
+           Master of Arts in Education, Major in Teaching Science
+          </h3>
+          <p>
+           The program aims to update and enrich teachers content knowledge, enhance and expand their theoretical and technical knowledge for teaching, and develop teachers&rsquo; research capabilities for reviewing, verifying, validating, contextualizing, and applying theoretical and practical knowledge in education.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          6
+         </span>
+         <div>
+          <h3>
+           Master of Business Administration
+          </h3>
+          <p>
+           The program develops entrepreneurial skills and leadership capability to address the nature and complexity of today&rsquo;s diversified domestic and global business environment. It provides in-depth understanding of core business functions through critical and analytical skills while promoting collaboration, communication, and flexibility.
+          </p>
+         </div>
+        </div>
+        <div class="program-item">
+         <span class="program-number">
+          7
+         </span>
+         <div>
+          <h3>
+           Master of Science in Criminal Justice, Major in Criminology
+          </h3>
+          <p>
+           The program prepares students to excel in the field of Criminology, equips them with advanced knowledge and skills necessary for professional practice, encourages advanced and independent research in criminology, and trains professionals to become globally competitive in the field.
+          </p>
+         </div>
+        </div>
+       </div>
+      </section>
+      <div class="academics-empty" id="academicEmpty">
+       No college or program found.
+      </div>
+     </div>
+    </div>
+
+    <div class="modal-overlay" id="collegeModal" aria-hidden="true">
+     <div class="manage-modal">
+      <div class="modal-header">
+       <div>
+        <span class="modal-kicker">ACADEMICS</span>
+        <h2 id="collegeModalTitle">Add College</h2>
+        <p>Manage the college details and its programs.</p>
+       </div>
+       <button class="modal-close" id="closeCollegeModal" type="button"><i data-lucide="x"></i></button>
+      </div>
+      <form class="modal-form" id="collegeForm">
+       <input id="collegeIndex" type="hidden">
+       <div class="form-grid">
+        <label class="form-field full"><span>College Name</span><input id="collegeName" required type="text"></label>
+        <label class="form-field full"><span>Short Description</span><textarea id="collegeDescription" rows="3"></textarea></label>
+        <label class="form-field"><span>Banner Image</span><input id="collegeBanner" accept="image/*" type="file"></label>
+        <label class="form-field"><span>Featured Image</span><input id="collegeFeatured" accept="image/*" type="file"></label>
+        <label class="form-field"><span>Status</span><select id="collegeStatus"><option>Active</option><option>Hidden</option></select></label>
+       </div>
+       <div class="modal-section">
+        <div class="section-heading-row">
+         <div><h3>Programs</h3><p>Add, edit, or remove programs.</p></div>
+         <button class="secondary-btn" id="modalAddProgram" type="button"><i data-lucide="plus"></i>Add Program</button>
+        </div>
+        <div class="modal-program-list" id="modalProgramList"></div>
+       </div>
+       <div class="modal-footer">
+        <button class="secondary-outline-btn" id="cancelCollege" type="button">Cancel</button>
+        <button class="primary-btn" type="submit"><i data-lucide="save"></i>Save Changes</button>
+       </div>
+      </form>
+     </div>
+    </div>
+
+    <div class="modal-overlay" id="programModal" aria-hidden="true">
+     <div class="manage-modal small-modal">
+      <div class="modal-header">
+       <div>
+        <span class="modal-kicker">PROGRAM</span>
+        <h2 id="programModalTitle">Add Program</h2>
+        <p>Enter the program information.</p>
+       </div>
+       <button class="modal-close" id="closeProgramModal" type="button"><i data-lucide="x"></i></button>
+      </div>
+      <form class="modal-form" id="programForm">
+       <input id="programCollegeIndex" type="hidden">
+       <input id="programIndex" type="hidden">
+       <label class="form-field full"><span>Program Name</span><input id="programName" required type="text"></label>
+       <label class="form-field full"><span>Description</span><textarea id="programDescription" rows="5"></textarea></label>
+       <div class="modal-footer">
+        <button class="secondary-outline-btn" id="cancelProgram" type="button">Cancel</button>
+        <button class="primary-btn" type="submit"><i data-lucide="save"></i>Save Program</button>
+       </div>
+      </form>
+     </div>
+    </div>
+
+    <script>
+     (() => {
+      const $ = (id) => document.getElementById(id);
+      const collegeGrid = $("collegeGrid");
+      const search = $("academicSearch");
+      const collegeModal = $("collegeModal");
+      const programModal = $("programModal");
+      const STORAGE = "ucc_academics_data_v1";
+
+      const esc = (v) => String(v ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+      const text = (el) => el ? el.textContent.replace(/\s+/g," ").trim() : "";
+
+      function readPageData() {
+       return [...document.querySelectorAll(".college-card")].map(card => ({
+        name: text(card.querySelector("h2")),
+        description: "",
+        logo: card.querySelector(".college-logo img")?.src || "",
+        banner: "",
+        featured: "",
+        status: "Active",
+        programs: [...card.querySelectorAll(".program-item")].map(item => ({
+         name: text(item.querySelector("h3")),
+         description: text(item.querySelector("p")).replace(/^-\s*/,"")
+        }))
+       }));
+      }
+
+      let colleges = JSON.parse(localStorage.getItem(STORAGE) || "null") || readPageData();
+
+      function persist() {
+       localStorage.setItem(STORAGE, JSON.stringify(colleges));
+      }
+
+      function render() {
+       const q = search.value.trim().toLowerCase();
+       const empty = $("academicEmpty");
+
+       collegeGrid.querySelectorAll(".college-card").forEach(card => card.remove());
+
+       const visible = colleges.map((college,index) => ({college,index})).filter(({college}) => {
+        if (!q) return true;
+        return college.name.toLowerCase().includes(q) ||
+         college.programs.some(p => `${p.name} ${p.description}`.toLowerCase().includes(q));
+       });
+
+       visible.forEach(({college,index}) => {
+        const card = document.createElement("section");
+        card.className = "college-card";
+        card.dataset.index = index;
+
+        const programs = q && !college.name.toLowerCase().includes(q)
+         ? college.programs.filter(p => `${p.name} ${p.description}`.toLowerCase().includes(q))
+         : college.programs;
+
+        card.innerHTML = `
+         <div class="college-head">
+          <div class="college-logo">${college.logo ? `<img alt="${esc(college.name)} logo" src="${esc(college.logo)}">` : `<i data-lucide="graduation-cap"></i>`}</div>
+          <div class="college-heading">
+           <small>ACADEMIC UNIT</small>
+           <h2>${esc(college.name)}</h2>
+           <span>${college.programs.length} ${college.programs.length === 1 ? "program" : "programs"} · ${esc(college.status)}</span>
+          </div>
+          <div class="college-head-actions">
+           <button class="icon-btn edit-college" type="button" title="Edit College"><i data-lucide="pencil"></i></button>
+           <button class="toggle" type="button" title="Expand or collapse"><i data-lucide="chevron-up"></i></button>
+          </div>
+         </div>
+         <div class="program-list">
+          ${programs.length ? programs.map(p => {
+           const pi = college.programs.indexOf(p);
+           return `<div class="program-item" data-program-index="${pi}">
+            <span class="program-number">${pi + 1}</span>
+            <div class="program-main"><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p></div>
+            <div class="program-actions">
+             <button class="icon-btn edit-program" type="button" title="Edit Program"><i data-lucide="pencil"></i></button>
+             <button class="icon-btn danger delete-program" type="button" title="Delete Program"><i data-lucide="trash-2"></i></button>
+            </div>
+           </div>`;
+          }).join("") : `<div class="no-programs">No programs found.</div>`}
+          <button class="add-program-btn" type="button"><i data-lucide="plus"></i>Add Program</button>
+         </div>`;
+
+        collegeGrid.insertBefore(card, empty);
+       });
+
+       empty.style.display = visible.length ? "none" : "block";
+       lucide.createIcons();
+      }
+
+      function openCollege(index = null) {
+       const c = index === null ? null : colleges[index];
+       $("collegeIndex").value = index ?? "";
+       $("collegeModalTitle").textContent = c ? "Edit College" : "Add College";
+       $("collegeName").value = c?.name || "";
+       $("collegeDescription").value = c?.description || "";
+       $("collegeStatus").value = c?.status || "Active";
+       $("collegeBanner").value = "";
+       $("collegeFeatured").value = "";
+       renderModalPrograms(c?.programs || []);
+       collegeModal.classList.add("open");
+       collegeModal.setAttribute("aria-hidden","false");
+       lucide.createIcons();
+      }
+
+      function closeCollege() {
+       collegeModal.classList.remove("open");
+       collegeModal.setAttribute("aria-hidden","true");
+       $("collegeForm").reset();
+      }
+
+      function renderModalPrograms(programs) {
+       $("modalProgramList").innerHTML = programs.length ? programs.map((p,i) => `
+        <div class="modal-program-row" data-index="${i}">
+         <span class="modal-program-number">${i+1}</span>
+         <div class="modal-program-info"><strong>${esc(p.name)}</strong><span>${esc(p.description || "No description")}</span></div>
+         <div class="program-actions" style="opacity:1">
+          <button class="icon-btn modal-edit" type="button" title="Edit Program"><i data-lucide="pencil"></i></button>
+          <button class="icon-btn danger modal-delete" type="button" title="Delete Program"><i data-lucide="trash-2"></i></button>
+         </div>
+        </div>`).join("") : `<div class="modal-empty">No programs added yet.</div>`;
+       lucide.createIcons();
+      }
+
+      function openProgram(collegeIndex, programIndex = null) {
+       const p = programIndex === null ? null : colleges[collegeIndex].programs[programIndex];
+       $("programCollegeIndex").value = collegeIndex;
+       $("programIndex").value = programIndex ?? "";
+       $("programModalTitle").textContent = p ? "Edit Program" : "Add Program";
+       $("programName").value = p?.name || "";
+       $("programDescription").value = p?.description || "";
+       programModal.classList.add("open");
+       programModal.setAttribute("aria-hidden","false");
+       lucide.createIcons();
+      }
+
+      function closeProgram() {
+       programModal.classList.remove("open");
+       programModal.setAttribute("aria-hidden","true");
+       $("programForm").reset();
+      }
+      $("addCollegeBtn").onclick = () => {};
+
+      collegeGrid.onclick = (e) => {
+       const card = e.target.closest(".college-card");
+       if (!card) return;
+       const ci = Number(card.dataset.index);
+       if (e.target.closest(".toggle")) {
+        const list = card.querySelector(".program-list");
+        const hidden = list.style.display === "none";
+        list.style.display = hidden ? "" : "none";
+        e.target.closest(".toggle").innerHTML = `<i data-lucide="${hidden ? "chevron-up" : "chevron-down"}"></i>`;
+        lucide.createIcons();
+        return;
+       }
+
+       const item = e.target.closest(".program-item");
+       if (!item) return;
+       const pi = Number(item.dataset.programIndex);
+      };
+
+      $("modalProgramList").onclick = (e) => {
+       const row = e.target.closest(".modal-program-row");
+       if (!row) return;
+       const ci = Number($("collegeIndex").value);
+       const pi = Number(row.dataset.index);
+      };
+      $("modalAddProgram").onclick = () => {};
+      $("collegeForm").onsubmit = (e) => {
+       e.preventDefault();
+      };
+
+      $("programForm").onsubmit = (e) => {
+       e.preventDefault();
+      };
+       if (pi === null) colleges[ci].programs.push(program);
+       else colleges[ci].programs[pi] = program;
+       persist();
+       render();
+       closeProgram();
+       if ($("collegeIndex").value !== "") renderModalPrograms(colleges[ci].programs);
+      };
+
+      $("closeCollegeModal").onclick = closeCollege;
+      $("cancelCollege").onclick = closeCollege;
+      $("closeProgramModal").onclick = closeProgram;
+      $("cancelProgram").onclick = closeProgram;
+      [collegeModal,programModal].forEach(m => m.onclick = e => {
+       if (e.target === m) m === collegeModal ? closeCollege() : closeProgram();
+      });
+      document.addEventListener("keydown", e => {
+       if (e.key === "Escape") { closeCollege(); closeProgram(); }
+      });
+      search.oninput = render;
+
+      render();
+     })();
+    </script>
+   </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts">
+  </script>
+  <script>
+   lucide.createIcons();
+
+	document.querySelectorAll(".menu-title").forEach(button=>{
+		button.addEventListener("click",()=>{
+			button.parentElement.classList.toggle("open");
+		});
+	});
+  </script>
+ </body>
+</html>

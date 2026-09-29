@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>UCC Admin | Posts </title>
+	<link rel="icon" type="image/png" href="images/ucc-LOGO.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+	<script src="https://unpkg.com/lucide@latest"></script>
+	<link rel="stylesheet" href="style.css">
+
+<style>
+.posts-page {
+    padding:30px 36px 40px;
+    background:linear-gradient(135deg,#fdfbf5,#f8f4ea);
+    min-height:calc(100vh - 112px);
+    box-sizing:border-box
+    }
+
+.posts-toolbar {
+    display:flex;align-items:center;
+    justify-content:space-between;
+    gap:16px;margin-bottom:22px;
+    flex-wrap:nowrap
+    }
+
+.posts-tools-left {
+    display:flex;
+    align-items:center;
+    gap:12px;flex:1;
+    min-width:0;
+    height:48px
+    }
+
+.posts-search {
+    position: relative;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.posts-search input {
+    width:100%;height:48px;
+    box-sizing:border-box;
+    padding:0 46px 0 48px;
+    border:1px solid #e8e3d8;
+    border-radius:16px;
+    background:#fff;
+    color:#0d2a21;
+    font:400 15px "DM Sans",sans-serif;
+    outline:none
+    }
+
+.posts-search i,
+.posts-search svg {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+}
+.posts-filter {
+    height:48px;
+    box-sizing:border-box;
+    padding:0 38px 0 16px;
+    min-width:150px;
+    border:1px solid #e8e3d8;
+    border-radius:16px;
+    background:#fff;
+    color:#0d2a21;
+    font:500 14px "DM Sans",sans-serif
+    }
+
+.post-btn {
+    height:48px;
+    padding:0 17px;
+    border:0;
+    border-radius:14px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    cursor:pointer;
+    font:700 14px "DM Sans",sans-serif;
+    transition:.2s
+    }
+
+.post-btn:hover {
+    transform:translateY(-1px)
+    }
+
+.post-btn-primary {
+    background:#005f3c;
+    color:#fff;
+    box-shadow:0 8px 18px rgba(0,95,60,.16)
+    }
+
+.post-btn-secondary {
+    background:#c89a0b;
+    color:#fff;
+    }
+
+.post-btn-danger {
+    background:#b42318;
+    color:#fff
+    }
+
+.post-btn-ghost {
+    background:#f8f4ea;
+    color:#005f3c;
+    border:1px solid #d8b056
+    }
+
+.posts-card {
+    background:rgba(253,251,245,.9);
+    border:1px solid #e8e3d8;
+    border-radius:26px;
+    box-shadow:0 12px 30px rgba(13,42,33,.07);
+    overflow:hidden
+    }
+
+.posts-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 24px;
+    border-bottom: 1px solid #e8e3d8;
+}
+
+.posts-card-head h2 {
+    margin: 0;
+    color: #0d2a21;
+    font: 600 20px "Segoe UI", sans-serif;
+}
+
+.posts-count {
+    color: #6d7873;
+    font: 500 13px "DM Sans", sans-serif;
+}
+
+.posts-table-wrap {
+    overflow: auto;
+}
+
+.posts-table {
+    width: 100%;
+    min-width: 920px;
+    border-collapse: collapse;
+}
+
+.posts-table th {
+    padding: 15px 18px;
+    background: #f8f4ea;
+    color: #53615b;
+    text-align: left;
+    font: 700 12px "DM Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.posts-table td {
+    padding: 15px 18px;
+    border-top: 1px solid #eee9df;
+    color: #0d2a21;
+    font: 400 14px "DM Sans", sans-serif;
+    vertical-align: middle;
+}
+
+.posts-table tbody tr:hover {
+    background: rgba(248,244,234,.75);
+}
+
+.featured-thumb {
+    width: 62px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px dashed #d8b056;
+    background: #f8f4ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9a8a62;
+    overflow: hidden;
+}
+
+.featured-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-title-cell {
+    font-weight: 700;
+}
+
+.category-text {
+    color: #596760;
+}
+
+.status-badge {
+    display: inline-flex;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font: 700 12px "DM Sans", sans-serif;
+}
+
+.status-published {
+    background: #e2f4eb;
+    color: #00633f;
+}
+
+.status-draft,
+.status-pending {
+    background: #fff1c9;
+    color: #795b00;
+}
+
+.status-archived {
+    background: #ececec;
+    color: #646464;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    padding-right: 14px;
+    box-sizing: border-box;
+}
+
+.action-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #e8e3d8;
+    border-radius: 10px;
+    background: #fff;
+    color: #005f3c;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.action-btn.archive {
+    color: #8a6900;
+}
+
+.action-btn.delete {
+    color: #b42318;
+}
+
+.empty-row {
+    text-align: center !important;
+    padding: 42px !important;
+    color: #7a847f !important;
+}
+
+.post-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+}
+
+.post-modal.open {
+    display: block;
+}
+
+.post-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(13,42,33,.42);
+    backdrop-filter: blur(4px);
+}
+
+.post-modal-panel {
+    position: relative;
+    width: min(820px, calc(100% - 32px));
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    margin: 20px auto;
+    background: #fdfbf5;
+    border: 1px solid #e8e3d8;
+    border-radius: 26px;
+    box-shadow: 0 24px 60px rgba(13,42,33,.2);
+}
+
+.post-modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 24px 26px;
+    border-bottom: 1px solid #e8e3d8;
+    position: sticky;
+    top: 0;
+    background: rgba(253,251,245,.96);
+    z-index: 2;
+}
+
+.post-modal-head h2 {
+    margin: 0 0 5px;
+    color: #0d2a21;
+    font: 600 22px "Segoe UI", sans-serif;
+}
+
+.post-modal-head p {
+    margin: 0;
+    color: #69756f;
+    font: 400 13px "DM Sans", sans-serif;
+}
+
+.modal-close {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e8e3d8;
+    border-radius: 12px;
+    background: #fff;
+    color: #0d2a21;
+    cursor: pointer;
+}
+
+.post-form {
+    padding: 26px;
+}
+
+.post-form label {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.post-form label > span {
+    display: block;
+    margin-bottom: 8px;
+    color: #0d2a21;
+    font: 700 13px "DM Sans", sans-serif;
+}
+
+.post-form input,
+.post-form select {
+    width: 100%;
+    height: 46px;
+    box-sizing: border-box;
+    padding: 0 13px;
+    border: 1px solid #e8e3d8;
+    border-radius: 13px;
+    background: #fff;
+    color: #0d2a21;
+    font: 400 14px "DM Sans", sans-serif;
+    outline: none;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 16px;
+}
+
+.image-upload-area {
+    padding: 20px;
+    margin-bottom: 22px;
+    border: 1px dashed #d8b056;
+    border-radius: 18px;
+    background: #f8f4ea;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.upload-placeholder {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #52615b;
+    font: 500 13px "DM Sans", sans-serif;
+}
+
+.upload-placeholder i {
+    width: 26px;
+    color: #005f3c;
+}
+
+.upload-placeholder strong {
+    color: #0d2a21;
+}
+
+.upload-placeholder span {
+    color: #7a847f;
+}
+
+.image-preview {
+    display: none;
+    width: 74px;
+    height: 54px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid #d8b056;
+}
+
+.editor-toolbar {
+    display: flex;
+    gap: 5px;
+    padding: 8px;
+    border: 1px solid #e8e3d8;
+    border-bottom: 0;
+    border-radius: 13px 13px 0 0;
+    background: #f8f4ea;
+}
+
+.editor-toolbar button {
+    width: 34px;
+    height: 32px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: #0d2a21;
+    cursor: pointer;
+}
+
+.editor-toolbar button:hover {
+    background: #fff;
+    border-color: #e8e3d8;
+}
+
+.content-editor {
+    min-height: 190px;
+    padding: 15px;
+    border: 1px;
+}
+
+
+    .form-actions {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:24px;
+        margin-top:24px;
+    }
+
+    .form-actions > div {
+        display:flex;
+        align-items:center;
+        gap:12px;
+    }
+
+@media(max-width:760px){
+    .posts-page {
+        padding:22px 18px 30px
+        }
+    .posts-toolbar {
+        flex-wrap:wrap 
+        }
+    .posts-tools-left {
+        width:100%;
+        height:auto;
+        flex-direction:column;
+        align-items:stretch 
+        }
+    .posts-search {
+        max-width:none
+        }
+    .posts-filter {
+        width:100%
+        }
+    .posts-toolbar>.post-btn {
+        width:100% 
+        }
+    .form-grid {
+        grid-template-columns:1fr
+        }
+    .post-modal-panel {
+        width:calc(100% - 20px);
+        margin:10px auto;
+        max-height:calc(100vh - 20px) 
+        }
+    .post-form {
+        padding:20px
+        }
+    .form-actions {
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+    }
+    .form-actions > div {
+        flex-direction:column;
+        gap:10px;
+    }
+    }
+</style>
+
+</head>
+<body>
+	<div class="dashboard-layout">
+		<aside class="sidebar">
+			<div class="sidebar-top">
+				<div class="logo-wrap">
+					<img src="images/ucc-LOGO.png" alt="UCC Logo">
+					<div>
+						<h2>UCC Admin</h2>
+						<p>University of Caloocan City</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="gold-line"></div>
+
+        <nav class="sidebar-nav">
+            <a href="Dashboard.html">
+                <i data-lucide="house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="Posts.html" class="active">
+                <i data-lucide="newspaper"></i>
+                <span>Posts</span>
+            </a>
+
+            <div class="menu-group">
+                <button class="menu-title" type="button">
+                    <div>
+                        <i data-lucide="graduation-cap"></i>
+                        <span>Academics</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="arrow"></i>
+                </button>
+                <div class="submenu">
+                    <a href="Academics.html">Colleges</a>
+                </div>
+            </div>
+
+            <div class="menu-group">
+                <button class="menu-title" type="button">
+                    <div>
+                        <i data-lucide="users"></i>
+                        <span>Officials</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="arrow"></i>
+                </button>
+                <div class="submenu">
+                    <a href="Executive-Officials.html">Executive Officials</a>
+                    <a href="Board-of-Regents.html">Board of Regents</a>
+                </div>
+            </div>
+
+            <div class="menu-group">
+                <button class="menu-title" type="button">
+                    <div>
+                        <i data-lucide="building-2"></i>
+                        <span>Components</span>
+                    </div>
+                    <i data-lucide="chevron-down" class="arrow"></i>
+                </button>
+                <div class="submenu">
+                    <a href="Campuses.html">Campuses</a>
+                    <a href="Contact-Information.html">Contact Information</a>
+                    <a href="Quick-Links.html">Quick Links</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="Password.html">
+                <i data-lucide="lock"></i>
+                <span>Password</span>
+            </a>
+
+            <a href="Logout.html">
+                <i data-lucide="log-out"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
+			<div class="sidebar-art"></div>
+		</aside>
+
+		<main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1>Posts</h1>
+                </div>
+
+            <div class="header-right">
+                <div class="admin-profile">
+                    <div class="admin-text">
+                        <small>Administrator</small>
+                        <span>Welcome, Admin!</span>
+                    </div>
+                    <div class="avatar">
+                        <i data-lucide="circle-user-round"></i>
+                    </div>
+                </div>
+            </div>
+
+                <div class="header-art"></div>
+
+                <div class="gold-divider">
+                    <span></span>
+                </div>
+</header>
+
+            <section class="posts-page">
+                <div class="posts-toolbar">
+                    <div class="posts-tools-left">
+                        <div class="posts-search">
+                            <input type="search" id="postSearch" placeholder="Search posts..." aria-label="Search posts">
+                            <i data-lucide="search"></i>
+                        </div>
+                        <select id="postFilter" class="posts-filter" aria-label="Filter posts">
+                            <option value="All">All</option>
+                            <option value="Published">Published</option>
+                            <option value="Draft">Draft</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Archived">Archived</option>
+                        </select>
+                    </div>
+                    <button class="post-btn post-btn-primary" id="addPostBtn" type="button">
+                        <i data-lucide="plus"></i> Add New Post
+                    </button>
+                </div>
+
+                <div class="posts-card">
+                    <div class="posts-card-head">
+                        <h2>Posts</h2>
+                        <span class="posts-count" id="postsCount">5 posts</span>
+                    </div>
+                    <div class="posts-table-wrap">
+                        <table class="posts-table">
+                            <thead>
+                                <tr>
+                                    <th>Featured Image</th><th>Title</th><th>Category</th>
+                                    <th>Publish Date</th><th>Views</th><th>Status</th><th class="actions-column">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="postsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="post-modal" id="postModal" aria-hidden="true">
+                    <div class="post-modal-backdrop" data-close-modal></div>
+                    <div class="post-modal-panel" role="dialog" aria-modal="true" aria-labelledby="postFormTitle">
+                        <div class="post-modal-head">
+                            <div>
+                                <h2 id="postFormTitle">Add New Post</h2>
+                                <p>Create or edit a post.</p>
+                            </div>
+                            <button class="modal-close" type="button" data-close-modal aria-label="Close">
+                                <i data-lucide="x"></i>
+                            </button>
+                        </div>
+
+                        <form class="post-form" id="postForm">
+                            <div class="image-upload-area">
+                                <div class="upload-placeholder" id="uploadPlaceholder">
+                                    <i data-lucide="image-plus"></i>
+                                    <strong>Featured Image</strong>
+                                    <span>Upload an image</span>
+                                </div>
+                                <img id="imagePreview" class="image-preview" alt="Featured image preview">
+                                <input type="file" id="featuredImage" accept="image/*" hidden>
+                                <button type="button" class="post-btn post-btn-ghost" id="uploadImageBtn">
+                                    <i data-lucide="upload"></i> Upload Image
+                                </button>
+                            </div>
+
+                            <div class="form-grid">
+                                <label><span>Post Title</span><input type="text" id="postTitle" placeholder="Enter post title" required></label>
+                                <label><span>Category</span>
+                                    <select id="postCategory">
+                                        <option>News</option><option>Announcement</option><option>Event</option>
+                                    </select>
+                                </label>
+                                <label><span>Publish Date</span><input type="date" id="postDate"></label>
+                                <label><span>Status</span>
+                                    <select id="postStatus">
+                                        <option>Draft</option><option>Published</option><option>Pending</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <label>
+                                <span>Content Editor</span>
+                                <div class="editor-toolbar">
+                                    <button type="button" data-command="bold"><i data-lucide="bold"></i></button>
+                                    <button type="button" data-command="italic"><i data-lucide="italic"></i></button>
+                                    <button type="button" data-command="underline"><i data-lucide="underline"></i></button>
+                                    <button type="button" data-command="insertUnorderedList"><i data-lucide="list"></i></button>
+                                    <button type="button" data-command="justifyLeft"><i data-lucide="align-left"></i></button>
+                                    <button type="button" data-command="justifyCenter"><i data-lucide="align-center"></i></button>
+                                </div>
+                                <div id="postContent" class="content-editor" contenteditable="true">
+                                    <p>Write your post content here...</p>
+                                </div>
+                            </label>
+
+                            <div class="form-actions">
+                                <button type="button" class="post-btn post-btn-ghost" data-close-modal>Cancel</button>
+                                <div>
+                                    <button type="button" class="post-btn post-btn-secondary" id="saveDraftBtn">Save Draft</button>
+                                    <button type="submit" class="post-btn post-btn-primary">Publish</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="ui-toast" id="uiToast"></div>
+            </section>
+
+</main>
+</div>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const posts = [
+        {id:1,title:"University of Caloocan City News",category:"News",date:"2026-09-10",views:1240,status:"Published",image:"",content:"<p>Write your post content here...</p>"},
+        {id:2,title:"Important University Announcement",category:"Announcement",date:"2026-09-08",views:865,status:"Published",image:"",content:"<p>Write your post content here...</p>"},
+        {id:3,title:"Upcoming University Event",category:"Event",date:"2026-09-20",views:0,status:"Pending",image:"",content:"<p>Write your post content here...</p>"},
+        {id:4,title:"Student Activities Update",category:"News",date:"2026-09-05",views:0,status:"Draft",image:"",content:"<p>Write your post content here...</p>"},
+        {id:5,title:"Archived University Notice",category:"Announcement",date:"2026-08-28",views:0,status:"Archived",image:"",content:"<p>Write your post content here...</p>"}
+    ];
+
+    let editingId = null;
+    const $ = id => document.getElementById(id);
+    const tableBody=$("postsTableBody"), search=$("postSearch"), filter=$("postFilter");
+    const modal=$("postModal"), form=$("postForm"), file=$("featuredImage"), preview=$("imagePreview");
+    const placeholder=$("uploadPlaceholder"), toast=$("uiToast"), content=$("postContent");
+
+    const escapeHtml = v => String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+    const formatDate = d => d ? new Date(d+"T00:00:00").toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"}) : "—";
+
+    function render(){
+        const q=search.value.trim().toLowerCase(), f=filter.value;
+        const list=posts.filter(p=>(p.title.toLowerCase().includes(q)||p.category.toLowerCase().includes(q))&&(f==="All"||p.status===f));
+        $("postsCount").textContent=`${list.length} ${list.length===1?"post":"posts"}`;
+        tableBody.innerHTML=list.length ? list.map(p=>`
+            <tr>
+                <td><div class="featured-thumb">${p.image?`<img src="${p.image}" alt="">`:`<i data-lucide="image"></i>`}</div></td>
+                <td class="post-title-cell">${escapeHtml(p.title)}</td>
+                <td class="category-text">${escapeHtml(p.category)}</td>
+                <td>${formatDate(p.date)}</td><td>${p.views.toLocaleString()}</td>
+                <td><span class="status-badge status-${p.status.toLowerCase()}">${escapeHtml(p.status)}</span></td>
+                <td><div class="action-buttons">
+                    <button class="action-btn" data-action="edit" data-id="${p.id}" title="Edit"><i data-lucide="pencil"></i></button>
+                    <button class="action-btn archive" data-action="archive" data-id="${p.id}" title="Archive"><i data-lucide="archive"></i></button>
+                    <button class="action-btn delete" data-action="delete" data-id="${p.id}" title="Delete"><i data-lucide="trash-2"></i></button>
+                </div></td>
+            </tr>`).join("") : `<tr><td colspan="7" class="empty-row">No posts found.</td></tr>`;
+        lucide.createIcons();
+    }
+
+    function openModal(p=null){
+        editingId=p?.id||null;
+        $("postFormTitle").textContent=p?"Edit Post":"Add New Post";
+        $("postTitle").value=p?.title||"";$("postCategory").value=p?.category||"News";
+        $("postDate").value=p?.date||"";$("postStatus").value=p?.status==="Archived"?"Draft":(p?.status||"Draft");
+        content.innerHTML=p?.content||"<p>Write your post content here...</p>";
+        if(p?.image){preview.src=p.image;preview.style.display="block";placeholder.style.display="none"}else{preview.removeAttribute("src");preview.style.display="none";placeholder.style.display="flex"}
+        modal.classList.add("open");modal.setAttribute("aria-hidden","false");lucide.createIcons();
+    }
+    function closeModal(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true");editingId=null;form.reset();content.innerHTML="<p>Write your post content here...</p>";preview.removeAttribute("src");preview.style.display="none";placeholder.style.display="flex"}
+    function notify(msg){toast.textContent=msg;toast.classList.add("show");clearTimeout(notify.t);notify.t=setTimeout(()=>toast.classList.remove("show"),2200)}
+
+    function save(status){
+        const data={title:$("postTitle").value.trim()||"Untitled Post",category:$("postCategory").value,date:$("postDate").value,views:editingId?(posts.find(p=>p.id===editingId)?.views||0):0,status,content:content.innerHTML,image:preview.src||""};
+        if(editingId){Object.assign(posts.find(p=>p.id===editingId),data);notify(status==="Published"?"Post updated and published.":"Draft updated.")}
+        else{posts.unshift({id:Date.now(),...data});notify(status==="Published"?"Post published.":"Draft saved.")}
+        render();closeModal();
+    }
+
+    $("addPostBtn").onclick=()=>openModal();
+    search.oninput=render;filter.onchange=render;
+    tableBody.onclick=e=>{
+        const b=e.target.closest("[data-action]");if(!b)return;
+        const p=posts.find(x=>x.id===Number(b.dataset.id));if(!p)return;
+        if(b.dataset.action==="edit")openModal(p);
+        if(b.dataset.action==="archive"){p.status=p.status==="Archived"?"Draft":"Archived";render();notify(p.status==="Archived"?"Post archived.":"Post moved back to Draft.")}
+        if(b.dataset.action==="delete"&&confirm(`Delete "${p.title}"?`)){posts.splice(posts.indexOf(p),1);render();notify("Post deleted from the UI.")}
+    };
+    document.querySelectorAll("[data-close-modal]").forEach(b=>b.onclick=closeModal);
+    $("saveDraftBtn").onclick=()=>save("Draft");
+    form.onsubmit=e=>{e.preventDefault();save("Published")};
+    $("uploadImageBtn").onclick=()=>file.click();
+    file.onchange=()=>{const f=file.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{preview.src=e.target.result;preview.style.display="block";placeholder.style.display="none"};r.readAsDataURL(f)};
+    document.querySelectorAll(".editor-toolbar button").forEach(b=>b.onclick=()=>{content.focus();document.execCommand(b.dataset.command,false,null)});
+    document.onkeydown=e=>{if(e.key==="Escape"&&modal.classList.contains("open"))closeModal()};
+    render();
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+	lucide.createIcons();
+
+	document.querySelectorAll(".menu-title").forEach(button=>{
+		button.addEventListener("click",()=>{
+			button.parentElement.classList.toggle("open");
+		});
+	});
+</script>
+</body>
+</html>
