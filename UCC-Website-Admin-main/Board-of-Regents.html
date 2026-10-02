@@ -10,6 +10,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/lucide@latest"></script>
 	<link rel="stylesheet" href="style.css">
+
+	<link rel="stylesheet" href="Board-of-Regents.css">
 </head>
 <body>
 	<div class="dashboard-layout">
@@ -118,6 +120,113 @@
                 </div>
 </header>
 
+            <section class="bor-page">
+                <div class="bor-toolbar bor-toolbar-clean">
+                    <div>
+                        <p class="bor-description">Manage the members and official information of the University of Caloocan City Board of Regents.</p>
+                    </div>
+                    <button class="bor-primary" id="addBorBtn" type="button">
+                        <i data-lucide="plus"></i><span>Add Regent</span>
+                    </button>
+                </div>
+
+                <div class="bor-card">
+                    <div class="bor-card-top">
+                        <div class="bor-search">
+                            <i data-lucide="search"></i>
+                            <input id="borSearch" type="search" placeholder="Search regent..." autocomplete="off">
+                        </div>
+                        <div class="bor-filter-wrap">
+                            <label for="borStatusFilter">Status</label>
+                            <select id="borStatusFilter">
+                                <option value="all">All Status</option>
+                                <option value="active">Active</option>
+                                <option value="hidden">Hidden</option>
+                            </select>
+                        </div>
+                        <span class="bor-count" id="borCount">17 members</span>
+                    </div>
+
+                    <div class="bor-table-wrap">
+                        <table class="bor-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="borTableBody"></tbody>
+                        </table>
+                        <div class="bor-empty" id="borEmpty" hidden>
+                            <i data-lucide="users-round"></i>
+                            <strong>No regents found</strong>
+                            <span>Try another search or status filter.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="bor-modal" id="borModal" hidden>
+                <div class="bor-modal-box" role="dialog" aria-modal="true" aria-labelledby="borModalTitle">
+                    <div class="bor-modal-head">
+                        <div>
+                            <p class="bor-eyebrow">REGENT PROFILE</p>
+                            <h2 id="borModalTitle">Add Regent</h2>
+                        </div>
+                        <button class="bor-close" id="closeBorModal" type="button" aria-label="Close"><i data-lucide="x"></i></button>
+                    </div>
+                    <form id="borForm">
+                        <input type="hidden" id="borEditIndex" value="-1">
+                        <div class="bor-form-grid">
+                            <label>Photo <span class="optional">Optional</span><input id="borPhoto" type="file" accept="image/*"></label>
+                            <label>Full Name<input id="borName" type="text" required></label>
+                            <label>Position<input id="borPosition" type="text" required></label>
+                            <label>Display Order<input id="borOrder" type="number" min="1" required></label>
+                            <label class="full">Biography / Description<textarea id="borBio" rows="5"></textarea></label>
+                            <label>Status<select id="borStatus"><option>Active</option><option>Hidden</option></select></label>
+                        </div>
+                        <div class="bor-form-actions">
+                            <button class="bor-secondary" id="cancelBorBtn" type="button">Cancel</button>
+                            <button class="bor-primary" type="submit"><i data-lucide="save"></i><span>Save Regent</span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="bor-view-modal" id="borViewModal" hidden>
+                <div class="bor-view-backdrop"></div>
+                <div class="bor-view-box" role="dialog" aria-modal="true" aria-labelledby="borViewTitle">
+                    <div class="bor-view-head">
+                        <div>
+                            <p class="bor-eyebrow">REGENT PROFILE</p>
+                            <h2 id="borViewTitle">Board Member</h2>
+                        </div>
+                        <button class="bor-close" id="closeBorView" type="button" aria-label="Close"><i data-lucide="x"></i></button>
+                    </div>
+                    <div class="bor-view-content">
+                        <div class="bor-view-photo" id="borViewPhoto"></div>
+                        <div class="bor-view-details">
+                            <span class="bor-view-position" id="borViewPosition"></span>
+                            <h3 id="borViewName"></h3>
+                            <div class="bor-view-rule"></div>
+                            <p id="borViewBio"></p>
+                            <div class="bor-view-meta">
+                                <span><i data-lucide="badge-check"></i><b id="borViewStatus">Active</b></span>
+                                <span><i data-lucide="list-ordered"></i>Display Order: <b id="borViewOrder">1</b></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bor-view-actions">
+                        <button class="bor-secondary" id="closeBorViewBtn" type="button">Close</button>
+                        <button class="bor-primary" id="editFromView" type="button"><i data-lucide="pencil"></i><span>Edit Regent</span></button>
+                    </div>
+                </div>
+            </div>
+
 </main>
 </div>
 
@@ -133,5 +242,88 @@
 		});
 	});
 </script>
+
+<script>
+const borMembers = [
+ {photo:'BOR-MALAPITAN.jpg',name:'Hon. Dale Gonzalo "ALONG" R. MALAPITAN',position:'Chairperson, Board of Regents',bio:'Mayor Dale Gonzalo “Along” Malapitan is the 25th local chief executive of the historic City of Caloocan and the Chairman of the Board of Regents of the University of Caloocan City (UCC).'},
+ {photo:'BOR-NAS.png',name:'Atty. Jessamine Jared S. Nas',position:'Vice Chairman',bio:'Board Member'},
+ {photo:'BOR-CIEGO.png',name:'EnP. Aurora C. Ciego, DPA',position:'City Administrator',bio:'Board Member'},
+ {photo:'BOR-CAMINA.png',name:'Atty. Michael Arthur Camina',position:'Member',bio:'Board Member'},
+ {photo:'BOR-CUNANAN.png',name:'Hon. Carolyn C. Cunanan',position:'Member',bio:'Board Member'},
+ {photo:'BOR-PRADO.png',name:'Hon. Atty. Patrick L. Prado',position:'Member',bio:'Majority Floor Leader / Caloocan City Council'},
+ {photo:'BOR-LOPEZ.png',name:'Engr. Wenald H. Lopez, PhD',position:'Member',bio:'Board Member'},
+ {photo:'BOR-JUNIO.png',name:'Mr. John Nicklaus S. Junio',position:'Member',bio:'Board Member'},
+ {photo:'BOR-DANTAY.png',name:'Rodrigo M. Dantay Jr., DPA, EdD',position:'Member',bio:'DPA, EdD — Board Member'},
+ {photo:'BOR-CARANDANG.png',name:'Cecille G. Carandang, CESO VI',position:'Member',bio:'Board Member'},
+ {photo:'BOR-REYES.png',name:'Dionisio S. Reyes, DPA, LPT',position:'Member',bio:'Board Member'},
+ {photo:'BOR-MACKAY.png',name:'Dr. Eloisa P. Mackay',position:'Member',bio:'Board Member'},
+ {photo:'BOR-RABANAL.png',name:'Mr. Paul Daniel C. Rabanal',position:'Member',bio:'Board Member'},
+ {photo:'BOR-GARCIA.png',name:'Ms. Princess Garcia',position:'Member',bio:'Board Member'},
+ {photo:'BOR-YAKIT.png',name:'Ms. Leslie Anne C. Yakit',position:'Member',bio:'Board Member'},
+ {photo:'BOR-GONZALES.png',name:'Ms. Violeta Y. Gonzales',position:'Ex-Officio Member',bio:'Board Member'},
+ {photo:'BOR-YEE.png',name:'Catlleya C. Yee, PhD-ELL, LPT',position:'Secretary',bio:'Board Member'}
+];
+
+const $ = id => document.getElementById(id);
+const tbody=$('borTableBody'), search=$('borSearch'), filter=$('borStatusFilter'), count=$('borCount'), empty=$('borEmpty'), modal=$('borModal');
+function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function renderBor(){
+ const q=search.value.trim().toLowerCase(), f=filter.value;
+ const rows=borMembers.map((m,i)=>({...m,index:i,status:m.status||'Active'})).filter(m=>{
+  const matches=!q || `${m.name} ${m.position} ${m.bio}`.toLowerCase().includes(q);
+  return matches && (f==='all' || m.status.toLowerCase()===f);
+ });
+ tbody.innerHTML=rows.map((m,n)=>`<tr data-index="${m.index}">
+   <td class="bor-number">${n+1}</td>
+   <td><div class="bor-avatar">${m.photo ? `<img src="images/${esc(m.photo)}" alt="${esc(m.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">` : ''}<span class="bor-avatar-fallback"><i data-lucide="user-round"></i></span></div></td>
+   <td><div class="bor-name">${esc(m.name)}</div><div class="bor-sub">${esc(m.bio||'Board Member')}</div></td>
+   <td><span class="bor-position">${esc(m.position)}</span></td>
+   <td><span class="bor-status ${m.status.toLowerCase()}">${esc(m.status)}</span></td>
+   <td><div class="bor-actions">
+      <button class="bor-action view" type="button" data-action="view" data-index="${m.index}" title="View"><i data-lucide="eye"></i></button>
+      <button class="bor-action edit" type="button" data-action="edit" data-index="${m.index}" title="Edit"><i data-lucide="pencil"></i></button>
+      <button class="bor-action delete" type="button" data-action="delete" data-index="${m.index}" title="Delete"><i data-lucide="trash-2"></i></button>
+   </div></td>
+ </tr>`).join('');
+ count.textContent=`${rows.length} ${rows.length===1?'member':'members'}`;
+ empty.hidden=rows.length!==0;
+ lucide.createIcons();
+}
+function openModal(index=-1){
+ $('borEditIndex').value=index;
+ $('borModalTitle').textContent=index<0?'Add Regent':'Edit Regent';
+ if(index>=0){const m=borMembers[index]; $('borName').value=m.name; $('borPosition').value=m.position; $('borBio').value=m.bio||''; $('borOrder').value=index+1; $('borStatus').value=m.status||'Active';}
+ else {$('borForm').reset(); $('borOrder').value=borMembers.length+1; $('borStatus').value='Active';}
+ modal.hidden=false; document.body.classList.add('bor-modal-open'); setTimeout(()=>$('borName').focus(),50);
+}
+function closeModal(){modal.hidden=true;document.body.classList.remove('bor-modal-open');}
+$('addBorBtn').addEventListener('click',()=>openModal()); $('closeBorModal').addEventListener('click',closeModal); $('cancelBorBtn').addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+search.addEventListener('input',renderBor); filter.addEventListener('change',renderBor);
+let currentViewIndex=-1;
+const viewModal=$('borViewModal');
+function openView(index){
+ currentViewIndex=index; const m=borMembers[index]; if(!m)return;
+ $('borViewTitle').textContent=m.position || 'Board Member';
+ $('borViewName').textContent=m.name;
+ $('borViewPosition').textContent=m.position;
+ $('borViewBio').textContent=m.bio || 'No additional description provided.';
+ $('borViewStatus').textContent=m.status||'Active';
+ $('borViewOrder').textContent=index+1;
+ const photo=$('borViewPhoto');
+ photo.innerHTML=m.photo ? `<img src="images/${esc(m.photo)}" alt="${esc(m.name)}" onerror="this.outerHTML='<div class=\'bor-view-fallback\'><i data-lucide=\'user-round\'></i></div>';lucide.createIcons();">` : `<div class="bor-view-fallback"><i data-lucide="user-round"></i></div>`;
+ viewModal.hidden=false; document.body.classList.add('bor-modal-open'); lucide.createIcons();
+}
+function closeView(){viewModal.hidden=true;currentViewIndex=-1;document.body.classList.remove('bor-modal-open');}
+tbody.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const i=+b.dataset.index,m=borMembers[i];if(b.dataset.action==='view')openView(i);if(b.dataset.action==='edit')openModal(i);if(b.dataset.action==='delete'){if(confirm(`Delete ${m.name}?`)){borMembers.splice(i,1);renderBor();}}});
+$('closeBorView').addEventListener('click',closeView);
+$('closeBorViewBtn').addEventListener('click',closeView);
+$('editFromView').addEventListener('click',()=>{const i=currentViewIndex;closeView();openModal(i);});
+viewModal.addEventListener('click',e=>{if(e.target===viewModal||e.target.classList.contains('bor-view-backdrop'))closeView();});
+$('borForm').addEventListener('submit',e=>{e.preventDefault();const i=+$('borEditIndex').value;const m={name:$('borName').value.trim(),position:$('borPosition').value.trim(),bio:$('borBio').value.trim(),status:$('borStatus').value};if(i<0)borMembers.push(m);else borMembers[i]=m;closeModal();renderBor();});
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!modal.hidden)closeModal();if(!viewModal.hidden)closeView();});
+renderBor();
+</script>
+
 </body>
 </html>

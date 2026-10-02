@@ -1,5 +1,3 @@
-
-/* Executive Officials frontend — content only; existing header/sidebar remain unchanged */
 .officials-page{padding:30px 36px 44px;background:linear-gradient(180deg,#fdfbf5 0%,#f8f4ea 100%);min-height:calc(100vh - 100px)}
 .page-toolbar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px}
 .toolbar-copy h2{margin:0;color:#0d2a21;font:700 24px "Segoe UI",sans-serif}
