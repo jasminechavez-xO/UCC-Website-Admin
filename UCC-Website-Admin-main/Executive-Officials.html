@@ -9,6 +9,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/lucide@latest"></script>
+     <link rel="stylesheet" href="Executive-Officials.css">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -118,20 +119,273 @@
                 </div>
 </header>
 
+            <section class="officials-page">
+                <div class="page-toolbar">
+                    <div class="toolbar-copy">
+                        <h2>Executive Officials</h2>
+                        <p>Manage executive official profiles displayed on the public website.</p>
+                    </div>
+                    <button class="primary-btn" id="addOfficialBtn" type="button">
+                        <i data-lucide="plus"></i>
+                        Add Official
+                    </button>
+                </div>
+
+                <div class="officials-card">
+                    <div class="table-toolbar">
+                        <div class="search-box">
+                            <i data-lucide="search"></i>
+                            <input id="officialSearch" type="search" placeholder="Search official...">
+                        </div>
+                        <div class="result-count" id="resultCount">23 officials</div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="officials-table">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Status</th>
+                                    <th class="actions-head">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="officialsTableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="empty-state" id="emptyState" hidden>
+                        <i data-lucide="user-round-search"></i>
+                        <h3>No officials found</h3>
+                        <p>Try a different search term.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="modal-overlay" id="viewModal" hidden>
+                <div class="official-modal view-modal" role="dialog" aria-modal="true" aria-labelledby="viewModalTitle">
+                    <div class="modal-header">
+                        <div>
+                            <span class="modal-eyebrow">Official Details</span>
+                            <h2 id="viewModalTitle">Executive Official</h2>
+                        </div>
+                        <button class="modal-close" id="closeViewBtn" type="button" aria-label="Close">
+                            <i data-lucide="x"></i>
+                        </button>
+                    </div>
+                    <div class="details-layout">
+                        <div class="details-photo" id="viewPhoto"></div>
+                        <div class="details-copy">
+                            <h3 id="viewName"></h3>
+                            <p class="details-position" id="viewPosition"></p>
+                            <span class="status-badge" id="viewStatus"></span>
+                            <div class="details-divider"></div>
+                            <p class="details-label">Biography / Short Description</p>
+                            <p class="details-bio" id="viewBio"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-overlay" id="officialModal" hidden>
+                <div class="official-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+                    <div class="modal-header">
+                        <div>
+                            <span class="modal-eyebrow">Executive Official</span>
+                            <h2 id="modalTitle">Add Official</h2>
+                        </div>
+                        <button class="modal-close" id="closeModalBtn" type="button" aria-label="Close">
+                            <i data-lucide="x"></i>
+                        </button>
+                    </div>
+
+                    <form id="officialForm">
+                        <div class="form-grid">
+                            <label>
+                                <span>Photo</span>
+                                <input id="photo" type="text" placeholder="images/EO-NAME.png">
+                                <small>Enter the image path used by the website.</small>
+                            </label>
+
+                            <label>
+                                <span>Full Name</span>
+                                <input id="name" type="text" required>
+                            </label>
+
+                            <label class="full">
+                                <span>Position</span>
+                                <input id="position" type="text" required>
+                            </label>
+
+                            <label class="full">
+                                <span>Biography / Short Description</span>
+                                <textarea id="bio" rows="4" placeholder="Enter biography or additional role information"></textarea>
+                            </label>
+
+                            <label>
+                                <span>Display Order</span>
+                                <input id="displayOrder" type="number" min="1" value="1">
+                            </label>
+
+                            <label>
+                                <span>Status</span>
+                                <select id="status">
+                                    <option>Active</option>
+                                    <option>Hidden</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="secondary-btn" id="cancelBtn" type="button">Cancel</button>
+                            <button class="primary-btn" type="submit">
+                                <i data-lucide="save"></i>
+                                Save Official
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
 </main>
 </div>
 
 
 
+
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
-	lucide.createIcons();
+lucide.createIcons();
 
-	document.querySelectorAll(".menu-title").forEach(button=>{
-		button.addEventListener("click",()=>{
-			button.parentElement.classList.toggle("open");
-		});
-	});
+document.querySelectorAll(".menu-title").forEach(button=>{
+    button.addEventListener("click",()=>{
+        button.parentElement.classList.toggle("open");
+    });
+});
+
+
+let officials = [
+["EO-NAS.png","Atty. Jessamine Jared S. Nas","THE UNIVERSITY PRESIDENT","Officer-in-Charge"],
+["EO-LOPEZ.png","Engr. Wenald H. Lopez, PhD","VP for Academic Affairs","Dean, College of Engineering"],
+["EO-DANTAY.png","Rodrigo M. Dantay Jr., DPA, EdD","Vice President for Student Affairs and Services",""],
+["EO-PRADO.png","Ramona A. Prado, EdD, LPT","Vice President for Quality Assurance","Dean, College of Education"],
+["EO-ENRIQUEZ.png","Bernadette B. Enriquez, DPA, LPT, CESE","Vice President for Research and Community Extension Services","Dean, College of Liberal Arts and Sciences"],
+["EO-BAUTISTA.png","Melinda M. Bautista, DPA, LPT","Vice President for Planning",""],
+["EO-MACKAY.png","Eloisa P. Mackay, PhD, LPT","VP for Administration","Dean, College of Business and Accountancy"],
+["EO-CARANDANG.png","Reynaldo H. Carandang Jr., MBA","AVP for Administration (Operations)",""],
+["EO-LEON.png","Ms. Edna R. De Leon","AVP for Administration (Finance and Human Resource Management)",""],
+["EO-REYES.png","Dionisio S. Reyes, DPA, LPT","AVP for Quality Assurance",""],
+["EO-MACARAEG.png","Teodoro A. Macaraeg Jr., DPA, DIT","AVP for Research",""],
+["EO-ESPINO.png","Anna Lea Sheryl P. Espino, MAEd, LPT","AVP for Student Affairs and Services","University Registrar, North"],
+["EO-AGUILAR.png","Janette L. Aguilar, DBA","AVP for Community and Extension Services",""],
+["EO-DEMESA.png","Juanito R. De Mesa III, DPA","AVP for Institutional Planning",""],
+["EO-JULIANES.png","Melchor S. Julianes, EdD, PhD, DPA, DBA","Dean of Graduate School",""],
+["EO-CALIZAR.png","Atty. Dexter B. Calizar","Officer-in-Charge, College of Law",""],
+["EO-DIZON.png","Nelson C. Dizon, PhD Crim, RCrim","Dean, College of Criminal Justice Education",""],
+["EO.PILI.png","Ms. Allora C. Pili","Director, Human Resources Management Office",""],
+["EO-MARIANO.png","Monica B. Mariano, CPA","Director, Finance and Accounting",""],
+["EO-SAENZ.png","Ma. Cecilia M. Saenz, DPA, LPT, RPM","University Registrar, South",""],
+["EO-VICTORIA.png","Efren P. Victoria, MIT","Director, Management Information System",""],
+["EO-YEE.png","Catlleya C. Yee, PhD-ELL, LPT","Board Secretary",""],
+["EO-NACIONALES.png","Ms. Ailamarie R. Nacionales","Executive Assistant to the Office of the President",""]
+].map((item, index) => ({
+    photo:item[0], name:item[1], position:item[2], bio:item[3] || 'No additional description provided.', status:'Active', order:index+1
+}));
+
+const tableBody = document.getElementById('officialsTableBody');
+const searchInput = document.getElementById('officialSearch');
+const resultCount = document.getElementById('resultCount');
+const emptyState = document.getElementById('emptyState');
+const modal = document.getElementById('officialModal');
+const viewModal = document.getElementById('viewModal');
+let editingIndex = null;
+
+function initials(name){
+    return name.split(/\s+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+}
+
+function photoMarkup(item){
+    return `<div class="table-photo"><img src="images/${item.photo}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span>${initials(item.name)}</span></div>`;
+}
+
+function renderOfficials(){
+    const term = searchInput.value.trim().toLowerCase();
+    const filtered = officials.filter(item => `${item.name} ${item.position} ${item.bio}`.toLowerCase().includes(term));
+    tableBody.innerHTML = filtered.map(item => {
+        const index = officials.indexOf(item);
+        return `<tr>
+            <td>${photoMarkup(item)}</td>
+            <td><div class="name-cell"><strong>${item.name}</strong><small>${item.bio || '—'}</small></div></td>
+            <td>${item.position}</td>
+            <td><span class="status-badge ${item.status === 'Active' ? 'active' : 'hidden-status'}">${item.status}</span></td>
+            <td class="actions-cell">
+                <button class="icon-btn view" title="View" aria-label="View ${item.name}" data-action="view" data-index="${index}"><i data-lucide="eye"></i></button>
+                <button class="icon-btn edit" title="Edit" aria-label="Edit ${item.name}" data-action="edit" data-index="${index}"><i data-lucide="pencil"></i></button>
+                <button class="icon-btn delete" title="Delete" aria-label="Delete ${item.name}" data-action="delete" data-index="${index}"><i data-lucide="trash-2"></i></button>
+            </td>
+        </tr>`;
+    }).join('');
+    resultCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'official' : 'officials'}`;
+    emptyState.hidden = filtered.length !== 0;
+    emptyState.style.display = filtered.length ? 'none' : '';
+    tableBody.parentElement.style.display = filtered.length ? '' : 'none';
+    lucide.createIcons();
+}
+
+function openModal(index=null){
+    editingIndex=index;
+    document.getElementById('modalTitle').textContent=index===null?'Add Official':'Edit Official';
+    const item=index===null?{photo:'',name:'',position:'',bio:'',order:officials.length+1,status:'Active'}:officials[index];
+    document.getElementById('photo').value=item.photo;
+    document.getElementById('name').value=item.name;
+    document.getElementById('position').value=item.position;
+    document.getElementById('bio').value=item.bio;
+    document.getElementById('displayOrder').value=item.order;
+    document.getElementById('status').value=item.status;
+    modal.hidden=false; document.body.classList.add('modal-open');
+}
+function closeModal(){ modal.hidden=true; if(viewModal.hidden) document.body.classList.remove('modal-open'); }
+function openView(index){
+    const item=officials[index];
+    document.getElementById('viewModalTitle').textContent=item.name;
+    document.getElementById('viewName').textContent=item.name;
+    document.getElementById('viewPosition').textContent=item.position;
+    document.getElementById('viewBio').textContent=item.bio || 'No additional description provided.';
+    const status=document.getElementById('viewStatus'); status.textContent=item.status; status.className=`status-badge ${item.status==='Active'?'active':'hidden-status'}`;
+    const photo=document.getElementById('viewPhoto'); photo.innerHTML=`<img src="images/${item.photo}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span>${initials(item.name)}</span>`;
+    viewModal.hidden=false; document.body.classList.add('modal-open'); lucide.createIcons();
+}
+function closeView(){ viewModal.hidden=true; if(modal.hidden) document.body.classList.remove('modal-open'); }
+
+document.getElementById('addOfficialBtn').addEventListener('click',()=>openModal());
+document.getElementById('closeModalBtn').addEventListener('click',closeModal);
+document.getElementById('cancelBtn').addEventListener('click',closeModal);
+document.getElementById('closeViewBtn').addEventListener('click',closeView);
+searchInput.addEventListener('input',renderOfficials);
+
+tableBody.addEventListener('click',e=>{
+    const btn=e.target.closest('[data-action]'); if(!btn)return;
+    const index=Number(btn.dataset.index);
+    if(btn.dataset.action==='view') openView(index);
+    if(btn.dataset.action==='edit') openModal(index);
+    if(btn.dataset.action==='delete' && confirm(`Delete ${officials[index].name}?`)){ officials.splice(index,1); renderOfficials(); }
+});
+
+document.getElementById('officialForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const item={photo:document.getElementById('photo').value.trim(),name:document.getElementById('name').value.trim(),position:document.getElementById('position').value.trim(),bio:document.getElementById('bio').value.trim()||'No additional description provided.',order:Number(document.getElementById('displayOrder').value)||officials.length+1,status:document.getElementById('status').value};
+    if(!item.name || !item.position)return;
+    if(editingIndex===null) officials.push(item); else officials[editingIndex]=item;
+    closeModal(); renderOfficials();
+});
+
+[modal,viewModal].forEach(el=>el.addEventListener('click',e=>{if(e.target===el){el.hidden=true;if(modal.hidden&&viewModal.hidden)document.body.classList.remove('modal-open')}}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeView();}});
+renderOfficials();
+
+
+
 </script>
 </body>
 </html>
