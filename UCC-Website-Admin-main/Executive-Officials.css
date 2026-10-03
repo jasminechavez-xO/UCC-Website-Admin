@@ -28,7 +28,7 @@
 #officialForm{padding:24px 26px 26px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.form-grid label{display:flex;flex-direction:column;gap:7px}.form-grid label.full{grid-column:1/-1}.form-grid label>span{font:700 13px "DM Sans";color:#0d2a21}.form-grid input,.form-grid textarea,.form-grid select{width:100%;box-sizing:border-box;border:1px solid #dcd7cb;border-radius:11px;background:#fff;padding:11px 12px;outline:0;font:400 14px "DM Sans";color:#0d2a21}.form-grid textarea{resize:vertical}.form-grid input:focus,.form-grid textarea:focus,.form-grid select:focus{border-color:#005f3c;box-shadow:0 0 0 3px rgba(0,95,60,.08)}.form-grid small{font:400 11px "DM Sans";color:#7a847e}.form-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid #e8e3d8}
 @media(max-width:800px){.officials-page{padding:24px 18px}.page-toolbar{align-items:flex-start;flex-direction:column}.page-toolbar .primary-btn{width:100%}.table-toolbar{align-items:stretch;flex-direction:column}.search-box{width:auto}.form-grid{grid-template-columns:1fr}.form-grid label.full{grid-column:auto}}
 
-/* Additional UI polish */
+
 body.modal-open{overflow:hidden}
 .table-photo{width:48px;height:48px;border-radius:14px;overflow:hidden;background:linear-gradient(145deg,#f4efe2,#fffdf8);border:1px solid #e8e3d8;display:grid;place-items:center;font-weight:800;color:#005f3c}
 .table-photo img{width:100%;height:100%;object-fit:cover}
